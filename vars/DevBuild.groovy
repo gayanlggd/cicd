@@ -9,6 +9,7 @@ def call() {
                 steps{
                     script{
                         repoURL = scm.getUserRemoteConfigs()[0].getUrl().replaceAll("http://","").replaceAll("https://","")
+                        def branch = "master"
                         if(repoURL == null || repoURL.trim() == "") {
                             throw new Exception("The Bitbucket URL is Null or Empty.") 
                         }
