@@ -58,7 +58,7 @@ def call() {
                             currentBuild.result = "FAILURE"
                             throw new Exception("Error finding the Capp or found more than one Capp in the Integration project.")
                         }
-                        def pathFragments = cappLoc.split('/')
+                        def pathFragments = cappLocation.split('/')
                         String cappName = pathFragments[pathFragments.length - 1].split("_")[0]
                         echo 'Backing up Capp ' +cappName
                         try {
