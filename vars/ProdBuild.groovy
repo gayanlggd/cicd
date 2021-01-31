@@ -13,7 +13,7 @@ def call() {
                         repoURL = scm.getUserRemoteConfigs()[0].getUrl().replaceAll("http://","").replaceAll("https://","")
                         tagName = env.TAG_NAME
                         envName = "Production" 
-                        if(repoUrl == null || repoUrl.trim() == "") {
+                        if(repoURL == null || repoURL.trim() == "") {
                             throw new Exception("The Bitbucket URL is Null or Empty.") 
                         }
                         deleteDir()
