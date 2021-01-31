@@ -3,7 +3,7 @@ def call() {
     def repoURL = ""
     def tagName = ""
     def envName = ""
-    def DEPLOYMENT_PATH = "/Users/gayand/wso2/prod/wso2ei-6.5.0/repository/deployment/server/carbonapps"
+    def DEPLOYMENT_PATH = "/Users/gayand/wso2/prod/repository/deployment/server/carbonapps"
     pipeline {
     agent { label 'master' }
         stages {
@@ -50,7 +50,7 @@ def call() {
                         input(
                             message: 'Do you want to proceed?',
                             ok: "Yes",
-                            submitter: admin
+                            submitter: "admin"
                         )
                         echo 'Deploying the Capp'
                         String cappLocation = sh(returnStdout: true, script: "find . -name \"*.car\"").trim()
@@ -64,25 +64,25 @@ def call() {
                         try {
                                 sh """
                                     mkdir -p ./backup
-                                    cp DEPLOYMENT_PATH/${cappName}*.car ./backup
+                                    cp ${DEPLOYMENT_PATH}/${cappName}*.car ./backup
                                 """
                         } catch (Exception e) {
                             echo 'Ignoring Error ' +e
                         }
                         try{
                             sh """
-                                rm -f DEPLOYMENT_PATH/${cappName}*.car
+                                rm -f ${DEPLOYMENT_PATH}/${cappName}*.car
                             """
                             sleep 15
                             sh """
-                                cp ${cappLocation} DEPLOYMENT_PATH
+                                cp ${cappLocation} ${DEPLOYMENT_PATH}
                             """
                         } catch(Exception e) {
                             echo 'Exception occured while deploying the Capp ' + e
                             echo 'Restoring the Capp from backup'
                             sh """
-                                rm -f DEPLOYMENT_PATH/${cappName}*.car
-                                cp ./backup + "/" + ${cappName} + "*.car" DEPLOYMENT_PATH
+                                rm -f ${DEPLOYMENT_PATH}/${cappName}*.car
+                                cp ./backup/${cappName}*.car ${DEPLOYMENT_PATH}
                             """
                             currentBuild.result = 'FAILURE'
                             throw new Exception("Error occured while Deploying the Capp" + e)
