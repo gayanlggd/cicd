@@ -18,7 +18,7 @@ def call() {
                         }
                         deleteDir()
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'bitbucket-integration', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                        fullRepoUrl = "http://" + java.net.URLEncoder.encode(USERNAME, "UTF-8") + ":" + java.net.URLEncoder.encode(PASSWORD, "UTF-8") + "@" + repoUrl;
+                        fullRepoUrl = "http://" + java.net.URLEncoder.encode(USERNAME, "UTF-8") + ":" + java.net.URLEncoder.encode(PASSWORD, "UTF-8") + "@" + repoURL;
                         sh """
                             set +x
                             rm -rf ./source
