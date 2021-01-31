@@ -54,7 +54,7 @@ def call() {
                         )
                         echo 'Deploying the Capp'
                         String cappLocation = sh(returnStdout: true, script: "find . -name \"*.car\"").trim()
-                        if(cappList == null && cappList.trim() == "" && cappList.split('\n').length > 1 ) {
+                        if(cappLocation == null && cappLocation.trim() == "" && cappLocation.split('\n').length > 1 ) {
                             currentBuild.result = "FAILURE"
                             throw new Exception("Error finding the Capp or found more than one Capp in the Integration project.")
                         }
