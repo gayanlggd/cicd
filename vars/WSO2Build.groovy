@@ -4,7 +4,7 @@ def call() {
     if(deployToProduction == true){
         ProdBuild()
     }else{
-        SnapshotBuild()
+        DevBuild()
     }
     
 }
